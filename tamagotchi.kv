@@ -1,0 +1,115 @@
+#:kivy 2.0.0
+# Интерфейс приложения-тамагочи
+
+MDScreen:
+    md_bg_color: self.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        padding: dp(20)
+        spacing: dp(10)
+
+        # Верхняя панель
+        MDTopAppBar:
+            title: "🐾 Тамагочи"
+            elevation: 4
+            right_action_items: [["restart", lambda x: app.reset()]]
+
+        # Карточка с питомцем
+        MDCard:
+            orientation: 'vertical'
+            padding: dp(20)
+            size_hint_y: None
+            height: dp(220)
+            elevation: 4
+            radius: [20,]
+            md_bg_color: [0.95, 0.95, 0.98, 1]
+
+            MDBoxLayout:
+                adaptive_height: True
+                spacing: dp(20)
+
+                MDLabel:
+                    text: app.mood_icon
+                    font_size: "100sp"
+                    size_hint_x: None
+                    width: self.texture_size[0]
+                    halign: 'center'
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    spacing: dp(5)
+
+                    MDLabel:
+                        text: app.name
+                        font_style: "H4"
+                        halign: 'left'
+                        valign: 'center'
+
+                    MDLabel:
+                        text: "Жив ✅" if app.is_alive else "Мёртв 💀"
+                        font_style: "Body1"
+                        halign: 'left'
+                        valign: 'center'
+                        theme_text_color: "Custom"
+                        text_color: [0, 0.8, 0, 1] if app.is_alive else [0.8, 0, 0, 1]
+
+        # Шкалы состояния
+        MDBoxLayout:
+            orientation: 'vertical'
+            spacing: dp(15)
+
+            MDBoxLayout:
+                MDLabel:
+                    text: "🍔 Голод"
+                    size_hint_x: None
+                    width: dp(80)
+                MDProgressBar:
+                    value: app.hunger
+                    max: 100
+                    color: [0.9, 0.3, 0.2, 1] if app.hunger > 70 else [0.3, 0.8, 0.3, 1]
+
+            MDBoxLayout:
+                MDLabel:
+                    text: "😊 Счастье"
+                    size_hint_x: None
+                    width: dp(80)
+                MDProgressBar:
+                    value: app.happiness
+                    max: 100
+                    color: [0.3, 0.8, 0.3, 1] if app.happiness > 70 else [0.9, 0.6, 0.1, 1]
+
+            MDBoxLayout:
+                MDLabel:
+                    text: "⚡ Энергия"
+                    size_hint_x: None
+                    width: dp(80)
+                MDProgressBar:
+                    value: app.energy
+                    max: 100
+                    color: [0.2, 0.6, 0.9, 1] if app.energy > 70 else [0.8, 0.3, 0.3, 1]
+
+        # Кнопки действий
+        MDBoxLayout:
+            orientation: 'horizontal'
+            spacing: dp(15)
+            size_hint_y: None
+            height: dp(50)
+
+            MDRaisedButton:
+                text: "🍔 Кормить"
+                on_release: app.feed()
+                md_bg_color: app.theme_cls.primary_color
+                disabled: not app.is_alive
+
+            MDRaisedButton:
+                text: "🎮 Играть"
+                on_release: app.play()
+                md_bg_color: app.theme_cls.primary_color
+                disabled: not app.is_alive
+
+            MDRaisedButton:
+                text: "💤 Спать"
+                on_release: app.sleep()
+                md_bg_color: app.theme_cls.primary_color
+                disabled: not app.is_alive
