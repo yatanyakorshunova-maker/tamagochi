@@ -1,20 +1,20 @@
 [app]
 
 # Название приложения
-title = Tamagotchi
+title = Мой цифровой питомец
 
 # Уникальный идентификатор
-package.name = tamagotchi
+package.name = digitalpet
 package.domain = org.yourcompany
 
 # Версия
 version = 1.0.0
 
-# Требования
-requirements = python3,kivy==2.3.0,kivymd==1.1.1
+# Требования (важно: правильные версии!)
+requirements = python3,kivy==2.2.0
 
 # Иконка
-app.icon = assets/icon.png
+app.icon = icon.png
 
 # Ориентация
 orientation = portrait
@@ -43,11 +43,10 @@ log_level = 2
 # Указываем корневую папку проекта
 source.dir = .
 
-# Папки для копирования
-# Убираем дублирующийся log_level
+# Настройки сборки
 android.accept_sdk_license = True
 android.archs = armeabi-v7a, arm64-v8a
 android.bootstrap = sdl2
-android.gradle_build_tools_version = 33.0.0
+android.gradle_build_tools_version = 33.0.2
 android.gradle_plugin_version = 7.4.2
 android.ndk_version = 25b
