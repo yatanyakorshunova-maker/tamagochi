@@ -7,16 +7,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04  # Используем стабильную версию
+    runs-on: ubuntu-22.04
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
+      uses: actions/checkout@v3  # Используем v3 вместо v4
     
     - name: Setup Python
-      uses: actions/setup-python@v4  # Версия 4 использует Node.js 16
+      uses: actions/setup-python@v4
       with:
         python-version: '3.11'
     
@@ -31,13 +29,21 @@ jobs:
           python3-pip
         pip3 install --upgrade pip
         pip3 install buildozer
+        pip3 install cython
+    
+    - name: Create placeholder icon
+      run: |
+        mkdir -p assets
+        # Создаем простую иконку (квадрат 512x512)
+        echo "iVBORw0KGgoAAAANSUhEUgAAAgAAAAIAAQMAAADOtka5AAAAA1BMVEWzMzPfXzTqAAAANklEQVR42u3BAQ0AAADCoPdPbQ8HFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/AY1+QABhKhmLAAAAABJRU5ErkJggg==" | base64 -d > assets/icon.png
     
     - name: Build APK
       run: |
         buildozer android debug deploy
     
     - name: Upload APK
-      uses: actions/upload-artifact@v4
+      if: success()
+      uses: actions/upload-artifact@v3  # Используем v3 вместо v4
       with:
         name: Tamagotchi-APK
         path: bin/*.apk
