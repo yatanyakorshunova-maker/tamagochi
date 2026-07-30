@@ -40,13 +40,11 @@ log_level = 2
 
 [buildozer]
 
-# КРИТИЧЕСКИ ВАЖНО: указываем корневую папку проекта
+# Указываем корневую папку проекта
 source.dir = .
 
 # Папки для копирования
-log_level = 2
-
-# Настройки Gradle
+# Убираем дублирующийся log_level
 android.accept_sdk_license = True
 android.archs = armeabi-v7a, arm64-v8a
 android.bootstrap = sdl2
