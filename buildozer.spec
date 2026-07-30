@@ -10,7 +10,14 @@ package.domain = org.yourcompany
 # Версия
 version = 1.0.0
 version.regex = __version__ = ['"](.*)['"]
-
+# В разделе [app]
+requirements = python3==3.11,kivy==2.3.0,kivymd==1.1.1
+android.api = 33
+android.minapi = 21
+android.ndk = 23c
+android.sdk = 33
+android.gradle_dependencies = 'androidx.appcompat:appcompat:1.6.1'
+android.enable_androidx = True
 # Требования для Android
 requirements = python3==3.11,kivy==2.3.0,kivymd==1.1.1
 
@@ -45,3 +52,4 @@ source.include_exts = py,png,jpg,kv,atlas
 # Игнорируемые папки и файлы
 source.exclude_exts = spec,md,gitignore
 source.exclude_dirs = tests, bin, docs, venv
+
