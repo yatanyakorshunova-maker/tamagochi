@@ -11,10 +11,10 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Используем v3 вместо v4
+      uses: actions/checkout@v4  # v4 работает, проблема была в upload-artifact
     
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5  # Обновил до v5 для совместимости
       with:
         python-version: '3.11'
     
@@ -42,8 +42,9 @@ jobs:
         buildozer android debug deploy
     
     - name: Upload APK
-      if: success()
-      uses: actions/upload-artifact@v3  # Используем v3 вместо v4
+      uses: actions/upload-artifact@v4  # ← ОБЯЗАТЕЛЬНО v4!
       with:
         name: Tamagotchi-APK
         path: bin/*.apk
+        if-no-files-found: error  # Хорошая практика — явно указать поведение
+        compression-level: 0  # Опционально: 0 для скорости, 9 для размера
