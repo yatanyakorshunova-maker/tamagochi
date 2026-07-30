@@ -10,7 +10,7 @@ package.domain = org.yourcompany
 # Версия
 version = 1.0.0
 
-# Требования (ВАЖНО: без указания версии Python)
+# Требования
 requirements = python3,kivy==2.3.0,kivymd==1.1.1
 
 # Иконка
@@ -22,7 +22,7 @@ orientation = portrait
 # Разрешения
 android.permissions = INTERNET
 
-# Настройки Android (проверенные значения)
+# Настройки Android
 android.api = 33
 android.minapi = 21
 android.ndk = 25b
@@ -40,8 +40,10 @@ log_level = 2
 
 [buildozer]
 
-# Папки для копирования
+# КРИТИЧЕСКИ ВАЖНО: указываем корневую папку проекта
 source.dir = .
+
+# Папки для копирования
 log_level = 2
 
 # Настройки Gradle
